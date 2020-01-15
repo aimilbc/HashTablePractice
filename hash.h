@@ -14,10 +14,21 @@ using namespace std;
 #define HASH_H
 
 class Hash{
+private:
+    static const int tableSize = 10;
+    struct item{
+        string name;
+        string drink;
+        item* next; // pointing the next item.
+    };
+    
+    item* HashTable[tableSize];
     
 public:
     Hash();
     int getHash(string);
+    void addItem(string name, string drink);
+    
 };
 
 
