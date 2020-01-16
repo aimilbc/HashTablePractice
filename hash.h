@@ -31,6 +31,7 @@ public:
     int NumOfItemsInBucket(int);
     void PrintTable();
     void PrintItemsInBucket(int);
+    void FindDrink(string);
 };
 
 

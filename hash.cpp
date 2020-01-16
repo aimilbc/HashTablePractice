@@ -88,6 +88,28 @@ void Hash::PrintItemsInBucket(int index){ // display the items in the bucket
     }
 }
 
+void Hash::FindDrink(string name){ // find the drink by name
+    int ind = getHash(name); // get index number using getHash function
+    bool found = false;
+    string drink;
+    item* Ptr = HashTable[ind];
+    
+    while(Ptr != NULL){
+        if(Ptr->name == name){
+            found = true;
+            drink = Ptr->drink;
+        }
+        Ptr = Ptr->next;
+    }
+    if (found == true){
+        cout << "Favorite drink = " << drink << endl;
+    }
+    else{
+        cout << name << "'s info wasn't found in the Table" << endl;
+    }
+
+}
+
 int Hash::getHash(string key){ // get a index number of item
     // key = name, adding ASCII number of the name and divided by the table size
     int index = 0;
