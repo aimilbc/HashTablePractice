@@ -13,7 +13,7 @@
 
 using namespace std;
 
-Hash::Hash(){
+Hash::Hash(){  // default constructor
     for(int i = 0; i < tableSize; i++){
         HashTable[i] = new item;
         HashTable[i] -> name = "empty";
@@ -22,13 +22,13 @@ Hash::Hash(){
     }
 }
 
-void Hash::addItem(string name, string drink){
-    int index = getHash(name);
-    if(HashTable[index]->name == "empty"){
+void Hash::addItem(string name, string drink){  // adding an item in the table
+    int index = getHash(name);  // get an index number for the person using getHash function
+    if(HashTable[index]->name == "empty"){  // since default is "empty", it means there is no item in the bucket, so we can add the item straight
         HashTable[index]->name = name;
         HashTable[index]->drink = drink;
     }
-    else{
+    else{ // if there were item(s) in the bucket, add a new item after the very last item of the bucket.
         item* Ptr = HashTable[index]; // a pointer pointing at the very first item in that bucket
         item* n = new item; // created a new item
         n->name = name; // assigned name
@@ -40,7 +40,8 @@ void Hash::addItem(string name, string drink){
         Ptr->next = n; // assigned the new item address to the last item pointer
     }
 }
-int Hash::NumOfItemsInBucket(int index){
+
+int Hash::NumOfItemsInBucket(int index){ // find amount of items in the bucket
     int count = 0;
     
     if(HashTable[index]->name == "empty"){ // since the default constructor assigns name = "empty", the bucket will not contain anything
@@ -54,17 +55,27 @@ int Hash::NumOfItemsInBucket(int index){
             Ptr = Ptr->next;
         }
     }
-    
     return count;
+}
+
+void Hash::PrintTable(){ // print the items in the table(printing only the first item if there were multiple items in a bucket)
+    int num;
+    for(int i = 0; i<tableSize; i++){
+        num = NumOfItemsInBucket(i);  // find the amount of items in the bucket
+        cout << "---------------------------" << endl;
+        cout << "index = " << i << endl;
+        cout << HashTable[i]->name << endl;
+        cout << HashTable[i]->drink << endl;
+        cout << "# of items in the bucket = " << num << endl;
+    }
 }
 
 int Hash::getHash(string key){
     int index = 0;
     
     for(int i = 0; i < key.length(); i++){
-        cout << "(int)key[i] = " << (int)key[i] << endl;
         index += key[i];
     }
     
-    return index%tableSize;
+    return index % tableSize;
 }

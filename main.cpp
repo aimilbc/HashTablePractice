@@ -16,11 +16,17 @@ int main(int argc, const char * argv[]) {
     
     Hash hashObj;
     
-    int ind = 0;
+    hashObj.addItem("Kana", "Cognac");
+    hashObj.addItem("Aimi", "Tito's");
+    hashObj.addItem("Leana", "Waterrr");
+    hashObj.addItem("Michael", "Anything");
+    hashObj.addItem("Anthony", "MoscowMule");
+    hashObj.addItem("Olivia", "NoPeanut");
+    hashObj.addItem("Travis", "BubbleJuice");
     
-    ind = hashObj.getHash("Aimi");
-    
-    cout << ind << endl;
+    hashObj.PrintTable();
+    cout << "Leana's hash bucket number is " << hashObj.getHash("Leana") << endl;
+    cout << "Index 1 has " << hashObj.NumOfItemsInBucket(1) << endl;
     
     return 0;
 }

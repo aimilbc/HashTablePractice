@@ -29,6 +29,7 @@ public:
     int getHash(string);
     void addItem(string name, string drink);
     int NumOfItemsInBucket(int);
+    void PrintTable();
 };
 
 
