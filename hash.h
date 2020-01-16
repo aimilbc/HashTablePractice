@@ -15,7 +15,7 @@ using namespace std;
 
 class Hash{
 private:
-    static const int tableSize = 10;
+    static const int tableSize = 5;
     struct item{
         string name;
         string drink;
@@ -32,6 +32,7 @@ public:
     void PrintTable();
     void PrintItemsInBucket(int);
     void FindDrink(string);
+    void RemoveItem(string);
 };
 
 

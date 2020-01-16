@@ -107,7 +107,58 @@ void Hash::FindDrink(string name){ // find the drink by name
     else{
         cout << name << "'s info wasn't found in the Table" << endl;
     }
+}
 
+void Hash::RemoveItem(string name){
+    int ind = getHash(name); // get index number of the name
+    item* delPtr;
+    item* P1;
+    item* P2;
+    
+    // the bucket has no item
+    if(HashTable[ind]->name == "empty"){
+        cout << name << "'s info wasn't found in the Table" << endl;
+    }
+    
+    // the bucket has ONLY one item wich is the item we're looking for
+    else if(HashTable[ind]->name == name && NumOfItemsInBucket(ind) == 1){
+        HashTable[ind]->name = "empty";
+        HashTable[ind]->drink = "empty";
+        
+        cout << name << " has been removed from the table." << endl;
+    }
+    
+    // the item was in the bucket's first place and there are more items in the bucket
+    else if(HashTable[ind]->name == name && NumOfItemsInBucket(ind) != 1){
+        delPtr = HashTable[ind]; // a pointer points to the deleting item
+        HashTable[ind] = HashTable[ind]->next; // the table points second item(skipping the deleting item)
+        delete delPtr; // deleting the item from the bucket
+        
+        cout << name << " has been removed from the table." << endl;
+    }
+    
+    // the item found in the bucket, but not the first item
+    else{
+        P1 = HashTable[ind]->next;  // P1 points the next item
+        P2 = HashTable[ind]; // P2 points the first item
+        // P2's "next" pointer is pointing P1
+        
+        while(P1 != NULL && P1->name != name){ // trevers P1 and P2 until find the deleting item
+            P2 = P1;
+            P1 = P1->next;
+        }
+        if (P1 == NULL){ // it means the pointer is pointing the last item, so the item is not found in the table
+            cout << name << "'s info wasn't found in the Table" << endl;
+        }
+        else{ // it means item found.
+            delPtr = P1; // deleting item assigned to delPtr pointer
+            P1 = P1->next; // P1 points to the next item
+            P2->next = P1; // P2 points P1(skipping the deleting item)
+            
+            delete delPtr; // deleting the item
+            cout << name << " has been removed from the table." << endl;
+        }
+    }
 }
 
 int Hash::getHash(string key){ // get a index number of item

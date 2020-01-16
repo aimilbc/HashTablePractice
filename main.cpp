@@ -15,18 +15,32 @@ using namespace std;
 int main(int argc, const char * argv[]) {
     
     Hash hashObj;
+    string name;
     
     hashObj.addItem("Kana", "Cognac");
     hashObj.addItem("Aimi", "Tito's");
     hashObj.addItem("Leana", "Waterrr");
     hashObj.addItem("Michael", "Anything");
-    hashObj.addItem("Anthony", "MoscowMule");
-    hashObj.addItem("Olivia", "NoPeanut");
-    hashObj.addItem("Travis", "BubbleJuice");
+    hashObj.addItem("Anthony", "Moscow Mule");
+    hashObj.addItem("Olivia", "No Peanut");
+    hashObj.addItem("Travis", "Bubble Juice");
+    hashObj.addItem("Paul", "Vodka");
+    hashObj.addItem("Michelle", "Dirty Martini");
+    hashObj.addItem("Kulala", "Shochu");
+    hashObj.addItem("Brandon", "Beer");
     
-    hashObj.PrintTable();
-    cout << "Leana's hash bucket number is " << hashObj.getHash("Leana") << endl;
-    cout << "Index 1 has " << hashObj.NumOfItemsInBucket(1) << endl;
+    //hashObj.PrintTable();
+    hashObj.PrintItemsInBucket(2);
+    
+    while(name != "exit"){
+        cout << "Remove ";
+        cin >> name;
+        if(name != "exit"){
+            hashObj.RemoveItem(name);
+        }
+    }
+    //hashObj.PrintTable();
+    hashObj.PrintItemsInBucket(2);
     
     return 0;
 }
