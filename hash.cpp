@@ -70,7 +70,26 @@ void Hash::PrintTable(){ // print the items in the table(printing only the first
     }
 }
 
-int Hash::getHash(string key){
+void Hash::PrintItemsInBucket(int index){ // display the items in the bucket
+    item* Ptr = HashTable[index]; // create a pointer to point to the first item in the bucket
+    
+    if(Ptr->name == "empty"){ // if there were not item in the bucket
+        cout << "Index " << index << " is empty" << endl;
+    }
+    
+    else{ // if there were item(s) in the bucket
+        cout << "Index " << index << " has " << NumOfItemsInBucket(index) << " items." << endl; // display the amount of item(s) in the bucket
+        while(Ptr != NULL){
+            cout << "---------------------------" << endl;
+            cout << "Name: " << Ptr->name << endl;
+            cout << "Drink: " << Ptr->drink << endl;
+            Ptr = Ptr->next; // treverse the pointer to the next item until point to NULL
+        }
+    }
+}
+
+int Hash::getHash(string key){ // get a index number of item
+    // key = name, adding ASCII number of the name and divided by the table size
     int index = 0;
     
     for(int i = 0; i < key.length(); i++){

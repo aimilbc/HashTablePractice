@@ -30,6 +30,7 @@ public:
     void addItem(string name, string drink);
     int NumOfItemsInBucket(int);
     void PrintTable();
+    void PrintItemsInBucket(int);
 };
 
 
