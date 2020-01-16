@@ -40,6 +40,23 @@ void Hash::addItem(string name, string drink){
         Ptr->next = n; // assigned the new item address to the last item pointer
     }
 }
+int Hash::NumOfItemsInBucket(int index){
+    int count = 0;
+    
+    if(HashTable[index]->name == "empty"){ // since the default constructor assigns name = "empty", the bucket will not contain anything
+        return count;
+    }
+    else{ // if there was an item in that bucket, traverse the bucket to count the item
+        count++;  // since we know there was at least one item in that bucket, increase the count to 1.
+        item* Ptr = HashTable[index]; // create a pointer to point the first item in the bucket
+        while (Ptr->next != NULL) { // traverse and count the item while the item pointer is NOT pointing to NULL
+            count++;
+            Ptr = Ptr->next;
+        }
+    }
+    
+    return count;
+}
 
 int Hash::getHash(string key){
     int index = 0;
